@@ -1,5 +1,4 @@
-﻿
-<Page x:Name="Welcome"
+﻿<Page x:Name="Welcome"
     x:Class="GeoShare.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,51 +8,50 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+     <Grid> 
+  
         <TextBlock x:Name="pageTitle" 
-                   HorizontalAlignment="Left" 
-                   Margin="55,61,0,0" 
-                   TextWrapping="Wrap" 
-                   Text="Welcome to Geo Share" 
-                   VerticalAlignment="Top" 
-                   SelectionChanged="TextBlock_SelectionChanged" 
-                   FontSize="30" Width="304"/>
+    		HorizontalAlignment="Left" 
+    		Margin="55,61,0,0" 
+    		TextWrapping="Wrap" 
+    		Text="Welcome to Geo Share" 
+    		VerticalAlignment="Top"    		
+    		FontSize="30" Width="304"/>
         <TextBlock x:Name="labelEnterPhone"
-                   HorizontalAlignment="Left"
-                   Margin="40,136,0,0"
-                   TextWrapping="Wrap"
-                   Text="Enter your phone number"
-                   VerticalAlignment="Top"
-                   FontSize="18" Height="61"
-                   Width="122"/>
+        	HorizontalAlignment="Left"
+        	Margin="40,136,0,0"
+        	TextWrapping="Wrap"
+        	Text="Enter your phone number"
+        	VerticalAlignment="Top"
+        	FontSize="18" Height="61"
+        	Width="122"/>
         <TextBlock x:Name="labelEnterName"
-                   HorizontalAlignment="Left"
-                   Margin="40,216,0,0"
-                   TextWrapping="Wrap" 
-                   Text="Enter your full name"
-                   VerticalAlignment="Top" 
-                   FontSize="18" 
-                   Height="61"
-                   Width="122"/>
+        	Margin="40,216,0,0"
+        	TextWrapping="Wrap" 
+        	Text="Enter your full name"
+        	VerticalAlignment="Top" 
+        	FontSize="18" 
+        	Height="61" HorizontalAlignment="Left" Width="122"/>
         <TextBox x:Name="enterPhoneNumber"
-                 HorizontalAlignment="Left" 
-                 Margin="185,136,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="TextBox"
-                 VerticalAlignment="Top" 
-                 Height="39" Width="174" 
-                 FontFamily="Global User Interface"/>
+    		HorizontalAlignment="Left" 
+    		Margin="185,136,0,0" 
+    		TextWrapping="Wrap" InputScope="Number"
+    		PlaceholderText="+1 987 654 3210"
+    		VerticalAlignment="Top" 
+    		Height="39" Width="174" 
+    		FontFamily="Global User Interface"/>
         <TextBox x:Name="enterFullName"
-                 HorizontalAlignment="Left"
-                 Margin="185,216,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="TextBox" 
-                 VerticalAlignment="Top" 
-                 Height="41" Width="174" TextChanged="enterFullName_TextChanged"/>
-        <Button Content="CONFIRM"
-                HorizontalAlignment="Left"
-                Margin="141,290,0,0" 
-                VerticalAlignment="Top" 
-                Click="Button_Click"/>
-    </Grid>
+    		HorizontalAlignment="Left"
+    		Margin="185,216,0,0" 
+    		TextWrapping="Wrap" 
+    		PlaceholderText="Shalini Ramachandra"
+    		VerticalAlignment="Top" 
+    		Height="41" Width="174" />
+        <Button Content="Confirm"
+    		HorizontalAlignment="Left"
+    		Margin="141,290,0,0" 
+    		VerticalAlignment="Top" 
+    		Click="Button_Click"/>
+         </Grid> 
+    
 </Page>

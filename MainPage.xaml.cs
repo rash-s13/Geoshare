@@ -12,55 +12,77 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace GeoShare
 {
+    public class TodoItem
+    {
+        public int Id { get; set; }
+
+       // [JsonProperty(PropertyName = "text")]
+        public string Text { get; set; }
+
+        public long PhoneNumber { get; set; }
+      //  [JsonProperty(PropertyName = "complete")]
+        public bool Complete { get; set; }
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private MobileServiceCollection<TodoItem, TodoItem> items;
+        private IMobileServiceTable<TodoItem> todoTable =
+            App.MobileService.GetTable<TodoItem>();
         public MainPage()
         {
             this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+       /*     InputScope scope = new InputScope();
+            InputScopeName name = new InputScopeName();
+            name.NameValue = InputScopeNameValue.Number;
+            scope.Names.Add(name);
+            enterPhoneNumber.InputScope = scope;*/
         }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
+        private async void InsertTodoItem(TodoItem todoItem)
+        {
+            await todoTable.InsertAsync(todoItem);
+            items.Add(todoItem);
+        }
+        private async void RefreshTodoItems()
+        {
+            items = await todoTable
+                .ToCollectionAsync();
+          //  ListItems.ItemsSource = items;
+        }
+        private async void UpdateCheckedTodoItem(TodoItem item)
+        {
+            await todoTable.UpdateAsync(item);
+        }
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshTodoItems();
+        }
+  
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
+           // RefreshTodoItems();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1));
+            
+            this.Frame.Navigate(typeof(GroupManagementPage),
+                new GroupManagementPageParameters { PhoneNumber = enterPhoneNumber.Text, FullName = enterFullName.Text });
+            var fullName = new TodoItem { Text = enterFullName.Text,
+                                          PhoneNumber = Convert.ToInt64(enterPhoneNumber.Text)};
+   
+            InsertTodoItem(fullName);
+            
         }
-
-        private void enterFullName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-
-
     }
 }
